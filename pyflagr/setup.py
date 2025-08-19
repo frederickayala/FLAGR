@@ -1,4 +1,4 @@
-from distutils.core import setup
+from setuptools import setup
 from setuptools import find_packages
 
 DESCRIPTION = 'PyFLAGR is a Python package for aggregating ranked preference lists from multiple sources.'
@@ -31,5 +31,6 @@ setup(
     keywords=[
         "rank aggregation", "rank fusion", "data fusion", "unsupervised learning", "information retrieval",
         "metasearch", "metasearch engines", "borda count", "condorcet", "kendall", "spearman"],
-    package_data={'': ['flagr.so', 'flagr.dylib', 'flagr.dll', 'libgcc_s_seh-1.dll', 'libstdc++-6.dll']}
+    package_data={'pyflagr': ['flagr.so', 'flagr.dylib', 'flagr.dll', 'libgcc_s_seh-1.dll', 'libstdc++-6.dll']},
+    include_package_data=True
 )
