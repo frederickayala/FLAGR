@@ -28,7 +28,7 @@ LIBFLAGS=-shared -fPIC
 FLAGR: flagr.o
 	$(CC)  -o  $(BINDIR)FLAGR  $(OBJDIR)flagr.o  $(CFLAGS)  -s
 	$(CC)  $(CFLAGS)  $(LIBFLAGS)  cflagr.cpp  -o  $(LIBDIR)$(LIB_NAME)
-	cp $(LIBDIR)flagr.so $(BINDIR)$(LIB_NAME)
+	cp $(LIBDIR)$(LIB_NAME) $(BINDIR)$(LIB_NAME)
 
 flagr.o: cflagr.cpp
 	mkdir -p $(BINDIR)
