@@ -87,7 +87,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            pyflagr/dist/*
+            pyflagr/dist/*.whl
+            pyflagr/dist/*.tar.gz
             pyflagr/pyflagr/flagr.so
             pyflagr/pyflagr/flagr.dylib
             pyflagr/pyflagr/flagr.dll
