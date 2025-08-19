@@ -1,0 +1,54 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_and_release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel
+
+      - name: Build C++ libraries on Linux
+        run: make
+        if: runner.os == 'Linux'
+
+      - name: Build C++ libraries on macOS
+        run: make
+        if: runner.os == 'macOS'
+
+      - name: Build C++ libraries on Windows
+        run: cmd.exe /c makefile.bat
+        if: runner.os == 'Windows'
+        shell: bash
+
+      - name: Build Python package
+        run: python setup.py sdist bdist_wheel
+        working-directory: ./pyflagr
+
+      - name: Create Release and Upload Assets
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            pyflagr/dist/*
+            pyflagr/pyflagr/flagr.so
+            pyflagr/pyflagr/flagr.dylib
+            pyflagr/pyflagr/flagr.dll
+            pyflagr/pyflagr/libgcc_s_seh-1.dll
+            pyflagr/pyflagr/libstdc++-6.dll
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
