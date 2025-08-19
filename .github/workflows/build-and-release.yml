@@ -74,9 +74,14 @@ jobs:
           mv artifacts/flagr-dylib/flagr.dylib pyflagr/pyflagr/flagr.dylib
           mv artifacts/flagr-dlls/* pyflagr/pyflagr/
 
+      - name: Set version from tag
+        run: echo "PYFLAGR_VERSION=${{ github.ref_name#v }}" >> $GITHUB_ENV
+
       - name: Build Python package
         working-directory: ./pyflagr
         run: python -m build
+        env:
+          PYFLAGR_VERSION: ${{ env.PYFLAGR_VERSION }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1

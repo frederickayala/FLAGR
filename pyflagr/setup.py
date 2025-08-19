@@ -1,5 +1,5 @@
-from setuptools import setup
-from setuptools import find_packages
+import os
+from setuptools import setup, find_packages
 
 DESCRIPTION = 'PyFLAGR is a Python package for aggregating ranked preference lists from multiple sources.'
 LONG_DESCRIPTION = 'The fusion of multiple ranked lists of elements into a single aggregate list is a well-studied '\
@@ -16,7 +16,7 @@ LONG_DESCRIPTION = 'The fusion of multiple ranked lists of elements into a singl
 
 setup(
     name='pyflagr',
-    version='1.0.21',
+    version=os.environ.get('PYFLAGR_VERSION', '1.0.0'),
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
     long_description_content_type='text/markdown',
