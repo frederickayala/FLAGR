@@ -74,14 +74,20 @@ jobs:
           mv artifacts/flagr-dylib/flagr.dylib pyflagr/pyflagr/flagr.dylib
           mv artifacts/flagr-dlls/* pyflagr/pyflagr/
 
-      - name: Set version from tag
-        run: echo "PYFLAGR_VERSION=${{ github.ref_name#v }}" >> $GITHUB_ENV
+      - name: Get the version
+        id: get_version
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const tag = context.ref.replace('refs/tags/v', '');
+            core.setOutput('version', tag);
+          result-encoding: string
 
       - name: Build Python package
         working-directory: ./pyflagr
         run: python -m build
         env:
-          PYFLAGR_VERSION: ${{ env.PYFLAGR_VERSION }}
+          PYFLAGR_VERSION: ${{ steps.get_version.outputs.version }}
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
