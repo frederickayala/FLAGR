@@ -38,7 +38,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build C++ library
-        run: makefile.bat
+        run: .\makefile.bat
       - name: Upload Windows artifact
         uses: actions/upload-artifact@v4
         with:
