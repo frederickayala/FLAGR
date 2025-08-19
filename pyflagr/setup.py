@@ -31,6 +31,5 @@ setup(
     keywords=[
         "rank aggregation", "rank fusion", "data fusion", "unsupervised learning", "information retrieval",
         "metasearch", "metasearch engines", "borda count", "condorcet", "kendall", "spearman"],
-    py_modules=["flagr"],
     package_data={'': ['flagr.so', 'flagr.dylib', 'flagr.dll', 'libgcc_s_seh-1.dll', 'libstdc++-6.dll']}
 )
